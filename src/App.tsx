@@ -1,13 +1,16 @@
 import "./App.css";
 import Navbar from "../components/Navbar.tsx";
+import Sudoku from "../components/Sudoku.tsx";
 
 function App() {
   return (
     <>
-      <header>
+      <header className="h-16">
         <Navbar />
       </header>
-      <main></main>
+      <main className="flex flex-col items-center justify-center w-full">
+        <Sudoku />
+      </main>
     </>
   );
 }

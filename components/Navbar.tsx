@@ -1,7 +1,7 @@
 function Navbar() {
   return (
     <nav className="w-full">
-      <span className="">Taiyaki</span>
+      <span className="text-2xl">Taiyaki</span>
     </nav>
   );
 }
