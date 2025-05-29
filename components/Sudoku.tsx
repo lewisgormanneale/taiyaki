@@ -5,6 +5,7 @@ import {
   lockBoard,
   validateBoard,
 } from "../utils/sudoku-utils.ts";
+import "./Sudoku.css";
 
 function Sudoku() {
   const [board, setBoard] = useState<Cell[][]>([]);
@@ -60,12 +61,12 @@ function Sudoku() {
     });
   };
 
-  if (!board) return <p className="p-4">Loading...</p>;
+  if (!board) return <p className="loading">Loading...</p>;
 
   return (
-    <div>
-      <div>Difficulty: {difficulty}</div>
-      <div className="grid grid-cols-9 border border-gray-300">
+    <div className="sudoku-container">
+      <div className="difficulty">Difficulty: {difficulty}</div>
+      <div className="sudoku-grid">
         {board.map((row, rowIndex) =>
           row.map((cell, colIndex) => (
             <input
@@ -74,7 +75,7 @@ function Sudoku() {
               type="text"
               inputMode="numeric"
               maxLength={1}
-              className={`w-10 h-10 text-center text-lg border border-gray-400 focus:outline-none ${cell.locked ? "bg-gray-200 font-bold" : "bg-white"}`}
+              className={`cell ${cell.locked ? "locked" : ""}`}
               value={cell.value ?? ""}
               onChange={(e) => handleChange(rowIndex, colIndex, e.target.value)}
               disabled={cell.locked}
@@ -82,9 +83,7 @@ function Sudoku() {
           )),
         )}
       </div>
-      {isComplete && (
-        <div className="mt-4 text-green-600 font-bold">Puzzle Complete</div>
-      )}
+      {isComplete && <div className="completion-message">Puzzle Complete</div>}
     </div>
   );
 }

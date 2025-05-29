@@ -5,10 +5,10 @@ import Sudoku from "../components/Sudoku.tsx";
 function App() {
   return (
     <>
-      <header className="h-16">
+      <header className="header">
         <Navbar />
       </header>
-      <main className="flex flex-col items-center justify-center w-full">
+      <main className="main-content">
         <Sudoku />
       </main>
     </>

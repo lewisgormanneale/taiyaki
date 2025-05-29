@@ -1,0 +1,47 @@
+.sudoku-container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.difficulty {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-template-rows: repeat(9, 40px);
+    border: 1px solid #ccc;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #999;
+    outline: none;
+    background-color: white;
+}
+
+.cell:focus {
+    border-color: #333;
+}
+
+.cell.locked {
+    background-color: #eee;
+    font-weight: bold;
+}
+
+.completion-message {
+    margin-top: 16px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.loading {
+    padding: 16px;
+    font-size: 16px;
+}

@@ -1,7 +1,12 @@
+import ThemeToggle from "./ThemeToggle.tsx";
+import "./Navbar.css";
+
 function Navbar() {
   return (
-    <nav className="w-full">
-      <span className="text-2xl">Taiyaki</span>
+    <nav className="navbar">
+      <div>Menu</div>
+      <h1>Taiyaki</h1>
+      <ThemeToggle />
     </nav>
   );
 }
