@@ -1,0 +1,29 @@
+:root {
+    --color-primary: #d77b42; /* Taiyaki crust */
+    --color-secondary: #9b5a3c; /* Red bean */
+    --color-accent: #6a994e; /* Matcha green */
+    --color-danger: #d62828; /* Error red */
+
+    --color-background: #faf6ef; /* Warm off-white */
+    --color-surface: #f0e9dd; /* Distinct card/panel base */
+    --color-border: #d4c8b8; /* Slight outline contrast */
+
+    --text-primary: #1e1e1e;
+    --text-muted: #6b6055;
+
+    --border-radius: 8px;
+}
+
+[data-theme="dark"] {
+    --color-primary: #f4a261; /* Toasted Taiyaki */
+    --color-secondary: #e76f51; /* Brighter bean paste */
+    --color-accent: #a7c957; /* Washed matcha */
+    --color-danger: #ef5753; /* Light red */
+
+    --color-background: #121110;
+    --color-surface: #1f1d1a;
+    --color-border: #3d3b36;
+
+    --text-primary: #fefefe;
+    --text-muted: #a99e94;
+}
