@@ -1,18 +1,15 @@
 .sudoku-container {
-    margin: 20px;
+    padding: 20px;
+    background-color: var(--color-surface);
     font-family: Arial, sans-serif;
-}
-
-.difficulty {
-    margin-bottom: 12px;
-    font-size: 16px;
+    border-radius: var(--border-radius);
 }
 
 .sudoku-grid {
     display: grid;
     grid-template-columns: repeat(9, 40px);
     grid-template-rows: repeat(9, 40px);
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
 }
 
 .cell {
@@ -20,13 +17,13 @@
     height: 40px;
     text-align: center;
     font-size: 18px;
-    border: 1px solid #999;
+    border: 1px solid var(--color-border);
     outline: none;
     background-color: white;
 }
 
 .cell:focus {
-    border-color: #333;
+    border-color: var(--color-accent);
 }
 
 .cell.locked {

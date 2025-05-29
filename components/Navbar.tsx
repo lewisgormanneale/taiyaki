@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div>Menu</div>
-      <h1>Taiyaki</h1>
+      <h1 className="title">Taiyaki</h1>
       <ThemeToggle />
     </nav>
   );

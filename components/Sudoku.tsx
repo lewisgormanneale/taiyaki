@@ -65,7 +65,7 @@ function Sudoku() {
 
   return (
     <div className="sudoku-container">
-      <div className="difficulty">Difficulty: {difficulty}</div>
+      <div>Difficulty: {difficulty}</div>
       <div className="sudoku-grid">
         {board.map((row, rowIndex) =>
           row.map((cell, colIndex) => (
