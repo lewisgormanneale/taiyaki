@@ -1,0 +1,5 @@
+.timer {
+    color: var(--color-primary);
+    font-weight: bolder;
+    font-size: 20px;
+}

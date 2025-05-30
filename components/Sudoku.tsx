@@ -6,17 +6,22 @@ import {
   validateBoard,
 } from "../utils/sudoku-utils.ts";
 import "./Sudoku.css";
+import Timer from "./Timer.tsx";
 
 function Sudoku() {
   const [board, setBoard] = useState<Cell[][]>([]);
   const [solution, setSolution] = useState<number[][]>([]);
   const [difficulty, setDifficulty] = useState<string>("");
   const [isComplete, setIsComplete] = useState(false);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [timerResetKey, setTimerResetKey] = useState(0);
 
   const fetchPuzzle = async () => {
     setIsComplete(false);
     setBoard([]);
     setDifficulty("");
+    setIsTimerRunning(false);
+    setTimerResetKey((prev) => prev + 1);
 
     try {
       const response = await fetch("https://sudoku-api.vercel.app/api/dosuku");
@@ -25,6 +30,7 @@ function Sudoku() {
       setBoard(formatBoard(grid.value));
       setSolution(grid.solution);
       setDifficulty(grid.difficulty);
+      setIsTimerRunning(true);
     } catch (err) {
       console.error("Failed to fetch puzzle:", err);
     }
@@ -40,6 +46,7 @@ function Sudoku() {
     if (complete) {
       setIsComplete(true);
       setBoard(lockBoard(board));
+      setIsTimerRunning(false);
     }
   }, [board, solution, isComplete]);
 
@@ -75,8 +82,10 @@ function Sudoku() {
   return (
     <div className="sudoku-container">
       <div className="puzzle-info">
-        <div>Difficulty: {difficulty}</div>
-        <div className="timer">Timer</div>
+        <div className="difficulty">{difficulty}</div>
+        <div className="timer-container">
+          <Timer isRunning={isTimerRunning} resetTrigger={timerResetKey} />
+        </div>
         <div className="new-puzzle">
           <button className="new-puzzle-button" onClick={() => fetchPuzzle()}>
             New Puzzle

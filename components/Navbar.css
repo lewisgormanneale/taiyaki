@@ -21,7 +21,9 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    font-size: 24px;
     color: var(--color-primary);
+    text-transform: uppercase;
 }
 
 .theme-toggle {
