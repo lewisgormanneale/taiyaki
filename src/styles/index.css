@@ -21,4 +21,8 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }

@@ -8,8 +8,25 @@
     height: 100%;
     padding: 6px 12px;
     background-color: var(--color-surface);
+    flex: 1;
+}
+
+
+.menu {
+    flex: 1
 }
 
 .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
     color: var(--color-primary);
+}
+
+.theme-toggle {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 1;
 }

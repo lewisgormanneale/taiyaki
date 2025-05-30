@@ -10,20 +10,28 @@ import "./Sudoku.css";
 function Sudoku() {
   const [board, setBoard] = useState<Cell[][]>([]);
   const [solution, setSolution] = useState<number[][]>([]);
-  const [difficulty, setDifficulty] = useState<string>("Unknown");
+  const [difficulty, setDifficulty] = useState<string>("");
   const [isComplete, setIsComplete] = useState(false);
 
+  const fetchPuzzle = async () => {
+    setIsComplete(false);
+    setBoard([]);
+    setDifficulty("");
+
+    try {
+      const response = await fetch("https://sudoku-api.vercel.app/api/dosuku");
+      const json = await response.json();
+      const grid = json.newboard.grids[0];
+      setBoard(formatBoard(grid.value));
+      setSolution(grid.solution);
+      setDifficulty(grid.difficulty);
+    } catch (err) {
+      console.error("Failed to fetch puzzle:", err);
+    }
+  };
+
   useEffect(() => {
-    fetch("/data/sudoku-easy.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setBoard(formatBoard(data.newboard.grids[0].value));
-        setSolution(data.newboard.grids[0].solution);
-        setDifficulty(data.newboard.grids[0].difficulty);
-      })
-      .catch((err) => {
-        console.error("Failed to load puzzle", err);
-      });
+    fetchPuzzle();
   }, []);
 
   useEffect(() => {
@@ -61,11 +69,20 @@ function Sudoku() {
     });
   };
 
-  if (!board) return <p className="loading">Loading...</p>;
+  if (!board.length || !difficulty)
+    return <p className="loading">Loading...</p>;
 
   return (
     <div className="sudoku-container">
-      <div>Difficulty: {difficulty}</div>
+      <div className="puzzle-info">
+        <div>Difficulty: {difficulty}</div>
+        <div className="timer">Timer</div>
+        <div className="new-puzzle">
+          <button className="new-puzzle-button" onClick={() => fetchPuzzle()}>
+            New Puzzle
+          </button>
+        </div>
+      </div>
       <div className="sudoku-grid">
         {board.map((row, rowIndex) =>
           row.map((cell, colIndex) => (
@@ -83,6 +100,7 @@ function Sudoku() {
           )),
         )}
       </div>
+      <div className="controls"></div>
       {isComplete && <div className="completion-message">Puzzle Complete</div>}
     </div>
   );
