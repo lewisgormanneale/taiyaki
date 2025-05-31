@@ -8,25 +8,31 @@
     padding: 6px 12px;
     background-color: var(--color-surface);
     flex: 1;
+
+    .menu-container {
+        flex: 1
+    }
+
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        font-size: 24px;
+        color: var(--color-primary);
+        text-transform: uppercase;
+        font-family: 'Bagel Fat One', system-ui, sans-serif;
+
+        .title {
+            font-size: 32px;
+
+        }
+    }
 }
 
 
-.menu {
-    flex: 1
-}
-
-.title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    font-size: 24px;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    font-family: 'Bagel Fat One', system-ui, sans-serif;
-}
-
-.theme-toggle {
+.theme-toggle-container {
     display: flex;
     justify-content: end;
     align-items: center;
