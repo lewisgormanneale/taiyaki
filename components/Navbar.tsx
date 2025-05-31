@@ -6,12 +6,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="menu-container">Menu</div>
       <div className="title-container">
-        <img
-          src="/src/assets/taiyaki.png"
-          width={45}
-          height={"auto"}
-          alt="logo"
-        />
+        <img src="/assets/taiyaki.png" width={45} height={"auto"} alt="logo" />
         <h1 className="title">Taiyaki</h1>
       </div>
       <div className="theme-toggle-container">
