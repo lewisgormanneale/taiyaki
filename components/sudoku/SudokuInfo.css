@@ -1,0 +1,25 @@
+.sudoku-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .difficulty-container {
+        flex: 1;
+
+        .difficulty {
+            color: var(--text-muted);
+        }
+    }
+
+    .timer-container {
+        flex: 1;
+        text-align: center;
+    }
+
+    .new-puzzle-container {
+        flex: 1;
+        display: flex;
+        justify-content: end;
+    }
+}

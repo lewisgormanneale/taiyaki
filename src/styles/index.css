@@ -1,4 +1,5 @@
 @import "./variables.css";
+@import "./fonts.css";
 
 * {
     box-sizing: border-box;
@@ -12,13 +13,27 @@ body {
     font-family: system-ui, sans-serif;
 }
 
-.button {
-    background-color: var(--color-primary);
-    border: none;
-    color: white;
-    padding: 15px 32px;
+button {
+    background-color: var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--text-muted);
+    border-width: 0;
+    cursor: pointer;
+    padding: 8px 12px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+        background-color: var(--text-muted);
+        color: var(--color-surface);
+    }
+
 }

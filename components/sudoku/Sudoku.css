@@ -1,0 +1,19 @@
+.loading {
+    padding: 16px;
+    font-size: 16px;
+}
+
+.sudoku-container {
+    padding: 20px;
+    background-color: var(--color-surface);
+    font-family: Arial, sans-serif;
+    border-radius: var(--border-radius);
+
+    .completion-message {
+        margin-top: 16px;
+        color: green;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+}
