@@ -1,0 +1,38 @@
+.sudoku-cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+    background-color: white;
+    border: 1px solid var(--color-border);
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    caret-color: transparent;
+
+    &:nth-child(9n + 3),
+    &:nth-child(9n + 6) {
+        border-right-width: 3px;
+    }
+
+    &:nth-child(n + 19):nth-child(-n + 27),
+    &:nth-child(n + 46):nth-child(-n + 54) {
+        border-bottom-width: 3px;
+    }
+
+
+    &.highlight-focus {
+        border: 3px solid var(--color-accent);
+    }
+
+    &.highlight-row,
+    &.highlight-col,
+    &.highlight-box {
+        background-color: rgba(167, 201, 87, 0.32);
+    }
+
+    &.locked {
+        background-color: #eee;
+        font-weight: bold;
+    }
+}

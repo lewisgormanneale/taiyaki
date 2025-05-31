@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import "./Timer.css";
+import "./SudokuTimer.css";
 
-interface TimerProps {
+interface Props {
   isRunning: boolean;
   onComplete?: (elapsedSeconds: number) => void;
-  resetTrigger?: number; // Use a key or state to force reset
+  resetTrigger?: number;
 }
 
-export default function Timer({
+export default function SudokuTimer({
   isRunning,
   onComplete,
   resetTrigger,
-}: TimerProps) {
+}: Props) {
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const intervalRef = useRef<number | null>(null);
 
@@ -38,7 +38,7 @@ export default function Timer({
     if (!isRunning && onComplete) {
       onComplete(elapsedTime);
     }
-  }, [isRunning]);
+  }, [isRunning, elapsedTime, onComplete]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)

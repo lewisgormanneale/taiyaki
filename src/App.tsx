@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "../components/Navbar.tsx";
-import Sudoku from "../components/Sudoku.tsx";
+import Sudoku from "../components/Sudoku/Sudoku.tsx";
 
 function App() {
   return (

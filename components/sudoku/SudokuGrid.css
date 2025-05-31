@@ -1,0 +1,10 @@
+.sudoku-grid {
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-template-rows: repeat(9, 40px);
+    border: 2px solid var(--color-border);
+    margin-bottom: 10px;
+    background-color: white;
+}
+
