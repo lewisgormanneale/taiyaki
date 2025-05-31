@@ -28,22 +28,6 @@
     justify-content: end;
 }
 
-.new-puzzle-button {
-    background-color: var(--color-background);
-    border-radius: var(--border-radius);
-    color: var(--text-muted);
-    border-width: 0;
-    cursor: pointer;
-    padding: 8px 12px;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-
 .sudoku-grid {
     margin-top: 6px;
     display: grid;
