@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo } from "react";
 import type { Cell } from "../../types/sudoku";
-import styles from "./SudokuCell.module.css";
+import "./SudokuCell.css";
 
 type Props = {
   row: number;
@@ -26,12 +26,12 @@ function SudokuCell({
   onChange,
 }: Props) {
   const cssClasses = useMemo(() => {
-    const classes = [styles.sudokuCell];
-    if (cell.locked) classes.push(styles.locked);
-    if (focused) classes.push(styles.highlightFocus);
-    if (inRow) classes.push(styles.highlightRow);
-    if (inCol) classes.push(styles.highlightCol);
-    if (inBox) classes.push(styles.highlightBox);
+    const classes = ["sudoku-cell"];
+    if (cell.locked) classes.push("locked");
+    if (focused) classes.push("highlight-focus");
+    if (inRow) classes.push("highlight-row");
+    if (inCol) classes.push("highlight-col");
+    if (inBox) classes.push("highlight-box");
     return classes.join(" ");
   }, [cell.locked, focused, inRow, inCol, inBox]);
 
