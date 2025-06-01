@@ -1,5 +1,6 @@
-import { type Cell } from "../../utils/sudoku-utils";
 import * as React from "react";
+import { memo, useCallback } from "react";
+import { type Cell } from "../../utils/sudoku-utils";
 import "./SudokuControls.css";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 
@@ -10,56 +11,85 @@ type Props = {
   setBoard: React.Dispatch<React.SetStateAction<Cell[][]>>;
 };
 
-const SudokuControls = ({
+const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
+
+function SudokuControls({
   focusedCell,
   setFocusedCell,
   board,
   setBoard,
-}: Props) => {
-  const moveFocus = (dr: number, dc: number) => {
-    if (!focusedCell) return;
-    const newRow = Math.max(0, Math.min(8, focusedCell.row + dr));
-    const newCol = Math.max(0, Math.min(8, focusedCell.col + dc));
-    setFocusedCell({ row: newRow, col: newCol });
-    const nextId = `r${newRow + 1}c${newCol + 1}`;
-    const el = document.getElementById(nextId) as HTMLInputElement | null;
-    if (el) el.focus();
-  };
+}: Props) {
+  const moveFocus = useCallback(
+    (dr: number, dc: number) => {
+      if (!focusedCell) return;
 
-  const inputValue = (val: number | null) => {
-    if (!focusedCell || !board.length) return;
-    const { row, col } = focusedCell;
-    if (board[row][col].locked) return;
-    const newBoard = board.map((r) => [...r]);
-    newBoard[row][col] = {
-      ...newBoard[row][col],
-      value: val,
-    };
-    setBoard(newBoard);
-  };
+      const newRow = Math.max(0, Math.min(8, focusedCell.row + dr));
+      const newCol = Math.max(0, Math.min(8, focusedCell.col + dc));
+
+      setFocusedCell({ row: newRow, col: newCol });
+
+      const nextId = `r${newRow + 1}c${newCol + 1}`;
+      const el = document.getElementById(nextId) as HTMLInputElement | null;
+      el?.focus();
+    },
+    [focusedCell, setFocusedCell],
+  );
+
+  const inputValue = useCallback(
+    (val: number | null) => {
+      if (!focusedCell || !board.length) return;
+      const { row, col } = focusedCell;
+      const cell = board[row]?.[col];
+      if (!cell || cell.locked) return;
+      setBoard((prev) => {
+        const newBoard = prev.map((r) => [...r]);
+        newBoard[row][col] = {
+          ...newBoard[row][col],
+          value: val,
+        };
+        return newBoard;
+      });
+    },
+    [focusedCell, board, setBoard],
+  );
+
+  const isDisabled = !focusedCell || !board.length;
+  const isCellLocked = Boolean(
+    focusedCell && board[focusedCell.row]?.[focusedCell.col]?.locked,
+  );
 
   return (
     <div className="sudoku-controls">
       <div className="number-buttons">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+        {NUMBERS.map((number) => (
           <button
+            key={number}
             className="control-button"
-            key={n}
-            onClick={() => inputValue(n)}
+            onClick={() => inputValue(number)}
+            disabled={isDisabled || isCellLocked}
+            aria-label={`Enter ${number}`}
           >
-            {n}
+            {number}
           </button>
         ))}
         <button
           className="control-button delete-button"
           onClick={() => inputValue(null)}
+          disabled={isDisabled || isCellLocked}
+          aria-label="Delete value"
         >
           ⌫
         </button>
       </div>
+
       <div className="arrow-buttons">
         <div className="arrow-row">
-          <button className="control-button" onClick={() => moveFocus(-1, 0)}>
+          <button
+            className="control-button"
+            onClick={() => moveFocus(-1, 0)}
+            disabled={isDisabled}
+            aria-label="Move up"
+          >
             <ArrowUp size={16} />
           </button>
         </div>
@@ -77,6 +107,6 @@ const SudokuControls = ({
       </div>
     </div>
   );
-};
+}
 
-export default SudokuControls;
+export default memo(SudokuControls);

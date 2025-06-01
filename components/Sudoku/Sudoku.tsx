@@ -1,21 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePuzzle } from "../../hooks/usePuzzle";
 import { usePuzzleNavigation } from "../../hooks/usePuzzleNavigation";
+import { useTimer } from "../../hooks/useTimer";
 import SudokuGrid from "./SudokuGrid";
 import "./Sudoku.css";
 import SudokuInfo from "./SudokuInfo.tsx";
 import SudokuControls from "./SudokuControls.tsx";
 
 export default function Sudoku() {
-  const {
-    board,
-    setBoard,
-    difficulty,
-    isComplete,
-    isTimerRunning,
-    timerResetKey,
-    fetchPuzzle,
-  } = usePuzzle();
+  const { board, setBoard, difficulty, isComplete, fetchPuzzle } = usePuzzle();
+  const timer = useTimer();
 
   const [focusedCell, setFocusedCell] = useState<{
     row: number;
@@ -42,13 +36,26 @@ export default function Sudoku() {
     [setBoard],
   );
 
+  const handleNewPuzzle = useCallback(async () => {
+    timer.reset();
+    await fetchPuzzle();
+    timer.start();
+  }, [fetchPuzzle, timer]);
+
+  useEffect(() => {
+    if (isComplete) {
+      timer.stop();
+    } else if (board.length && !timer.isRunning) {
+      timer.start();
+    }
+  }, [board.length, isComplete, timer]);
+
   return (
     <div className="sudoku-container">
       <SudokuInfo
         difficulty={difficulty}
-        isTimerRunning={isTimerRunning}
-        timerResetKey={timerResetKey}
-        onNewPuzzle={fetchPuzzle}
+        onNewPuzzle={handleNewPuzzle}
+        elapsedTime={timer.elapsedTime}
       />
       {board.length ? (
         <>
