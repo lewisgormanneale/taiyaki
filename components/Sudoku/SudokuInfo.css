@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 
     .difficulty-container {
         display: flex;
@@ -17,6 +18,13 @@
     .timer-container {
         flex: 1;
         text-align: center;
+
+        .timer {
+            color: var(--color-primary);
+            font-weight: bolder;
+            font-size: 20px;
+            font-family: 'BM Jua', system-ui, sans-serif;
+        }
     }
 
     .new-puzzle-container {

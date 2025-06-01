@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { useRef, useState } from "react";
 import MenuPopup from "./MenuPopup.tsx";
 
-function Navbar() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -37,5 +37,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
-function ThemeToggle() {
+export default function ThemeToggle() {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "light",
   );
@@ -21,5 +21,3 @@ function ThemeToggle() {
     </button>
   );
 }
-
-export default ThemeToggle;

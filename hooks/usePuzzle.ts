@@ -1,25 +1,17 @@
 import { useEffect, useState } from "react";
-import {
-  type Cell,
-  formatBoard,
-  lockBoard,
-  validateBoard,
-} from "../utils/sudoku-utils";
+import { formatBoard, lockBoard, validateBoard } from "../utils/sudoku-utils";
+import type { Cell } from "../types/sudoku.ts";
 
 export function usePuzzle() {
   const [board, setBoard] = useState<Cell[][]>([]);
   const [solution, setSolution] = useState<number[][]>([]);
   const [difficulty, setDifficulty] = useState(null);
   const [isComplete, setIsComplete] = useState(false);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [timerResetKey, setTimerResetKey] = useState(0);
 
   const fetchPuzzle = async ({ signal }: { signal?: AbortSignal } = {}) => {
     setIsComplete(false);
     setBoard([]);
     setDifficulty(null);
-    setIsTimerRunning(false);
-    setTimerResetKey((prev) => prev + 1);
 
     const response = await fetch("https://sudoku-api.vercel.app/api/dosuku", {
       signal,
@@ -30,7 +22,6 @@ export function usePuzzle() {
     setBoard(formatBoard(grid.value));
     setSolution(grid.solution);
     setDifficulty(grid.difficulty);
-    setIsTimerRunning(true);
   };
 
   useEffect(() => {
@@ -54,7 +45,6 @@ export function usePuzzle() {
     if (complete) {
       setIsComplete(true);
       setBoard(lockBoard(board));
-      setIsTimerRunning(false);
     }
   }, [board, solution, isComplete]);
 
@@ -63,8 +53,6 @@ export function usePuzzle() {
     setBoard,
     difficulty,
     isComplete,
-    isTimerRunning,
-    timerResetKey,
     fetchPuzzle,
   };
 }
