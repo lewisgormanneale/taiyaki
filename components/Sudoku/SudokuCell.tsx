@@ -50,7 +50,7 @@ function SudokuCell({
       pattern="[1-9]"
       maxLength={1}
       value={cell.value || ""}
-      className={cssClasses}
+      className={"sudoku-cell" + cssClasses}
       readOnly={cell.locked}
       onFocus={handleFocus}
       onChange={handleChange}
