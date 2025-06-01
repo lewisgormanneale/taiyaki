@@ -66,7 +66,10 @@ export default function Sudoku() {
           />
         </>
       ) : (
-        <></>
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Loading puzzle...</p>
+        </div>
       )}
       {isComplete && <div className="completion-message">Puzzle Complete!</div>}
     </div>
