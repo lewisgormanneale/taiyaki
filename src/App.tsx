@@ -1,4 +1,5 @@
 import "./App.css";
+import "../components/Sudoku/SudokuCell.css";
 import Navbar from "../components/Navbar.tsx";
 import Sudoku from "../components/Sudoku/Sudoku.tsx";
 
