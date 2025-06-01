@@ -1,4 +1,3 @@
-import { memo } from "react";
 import type { Cell } from "../../types/sudoku";
 import "./SudokuCell.css";
 
@@ -14,7 +13,7 @@ type Props = {
   onChange: (val: string) => void;
 };
 
-function SudokuCell({
+export default function SudokuCell({
   row,
   col,
   cell,
@@ -25,21 +24,6 @@ function SudokuCell({
   onFocus,
   onChange,
 }: Props) {
-  const cssClasses = [
-    "sudoku-cell",
-    cell.locked && "locked",
-    focused && "highlight-focus",
-    inRow && "highlight-row",
-    inCol && "highlight-col",
-    inBox && "highlight-box",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
-
   return (
     <input
       id={`r${row + 1}c${col + 1}`}
@@ -48,12 +32,9 @@ function SudokuCell({
       maxLength={1}
       value={cell.value ?? ""}
       onFocus={onFocus}
-      onChange={handleChange}
+      onChange={(e) => onChange(e.target.value)}
       disabled={cell.locked}
-      className={cssClasses}
-      aria-label={`Row ${row + 1}, Column ${col + 1}`}
+      className={`sudoku-cell ${cell.locked ? "locked" : ""} ${focused ? "highlight-focus" : ""} ${inRow ? "highlight-row" : ""} ${inCol ? "highlight-col" : ""} ${inBox ? "highlight-box" : ""}`}
     />
   );
 }
-
-export default memo(SudokuCell);

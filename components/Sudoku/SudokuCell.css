@@ -1,36 +1,28 @@
 .sudoku-cell {
     width: 40px;
     height: 40px;
-
     text-align: center;
     font-size: 16px; /* Prevents zoom on focus in iOS Safari */
     font-family: inherit;
     line-height: 1;
     caret-color: transparent;
-
     border: 1px solid var(--color-border);
     border-radius: 0;
     border-right-width: 1px;
     border-bottom-width: 1px;
-
     background-color: white;
     background-clip: padding-box;
     box-shadow: none;
-
     padding: 0;
     margin: 0;
-
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-
     outline: none;
     cursor: default;
-
     user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 
@@ -38,8 +30,6 @@
         width: 30px;
         height: 30px;
     }
-
-    /* Box border rules for Sudoku grid */
 
     &:nth-child(9n + 3),
     &:nth-child(9n + 6) {
