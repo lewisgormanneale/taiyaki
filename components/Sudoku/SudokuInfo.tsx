@@ -3,6 +3,7 @@ import { Flame, SkipForward } from "lucide-react";
 import type { Difficulty } from "../../types/sudoku.ts";
 import { getDifficultyConfig } from "../../utils/sudoku-utils.ts";
 import { formatTime } from "../../utils/utils.ts";
+import { useRef } from "react";
 
 interface Props {
   difficulty: Difficulty;
@@ -16,6 +17,19 @@ export default function SudokuInfo({
   elapsedTime,
 }: Props) {
   const { flameCount, flameColor } = getDifficultyConfig(difficulty);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleClick = () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      onNewPuzzle();
+      debounceRef.current = null;
+    }, 500); // 500ms debounce
+  };
+
   return (
     <div className="sudoku-info">
       <div className="difficulty-container">
@@ -29,7 +43,7 @@ export default function SudokuInfo({
         </div>
       </div>
       <div className="new-puzzle-container">
-        <button className="icon-button" onClick={onNewPuzzle}>
+        <button className="icon-button" onClick={handleClick}>
           <SkipForward size={20} />
         </button>
       </div>

@@ -10,6 +10,15 @@
     border-bottom-width: 1px;
     caret-color: transparent;
     cursor: default;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    background-clip: padding-box;
+    font-family: inherit;
 
     @media (max-width: 576px) {
         width: 30px;
