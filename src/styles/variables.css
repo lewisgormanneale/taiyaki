@@ -7,6 +7,7 @@
     --color-background: #faf6ef; /* Warm off-white */
     --color-surface: #f0e9dd; /* Distinct card/panel base */
     --color-border: #d4c8b8; /* Slight outline contrast */
+    --color-neutral: #eee;
 
     --text-primary: #1e1e1e;
     --text-muted: #6b6055;
@@ -24,6 +25,7 @@
     --color-background: #121110;
     --color-surface: #1f1d1a;
     --color-border: #3d3b36;
+    --color-neutral: #504d48;
 
     --text-primary: #fefefe;
     --text-muted: #a99e94;

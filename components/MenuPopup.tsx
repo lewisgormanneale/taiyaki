@@ -1,11 +1,13 @@
 // src/components/MenuPopup.tsx
+import * as React from "react";
 import { useEffect, useRef } from "react";
 import "./MenuPopup.css";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  anchorRef: React.RefObject<HTMLElement> | null;
+  anchorRef: React.RefObject<HTMLElement | null>;
 };
 
 export default function MenuPopup({ isOpen, onClose, anchorRef }: Props) {
@@ -37,23 +39,33 @@ export default function MenuPopup({ isOpen, onClose, anchorRef }: Props) {
   if (!isOpen) return null;
 
   return (
-    <div ref={ref} className="menu-popup">
-      <a
-        className="menu-popup-link"
-        href="https://github.com/lewisgormanneale"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub
-      </a>
-      <a
-        className="menu-popup-link"
-        href="https://lewisgormanneale.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Portfolio
-      </a>
+    <div ref={ref} className="menu-popup" role="menu">
+      <ul className="menu-popup-list">
+        <li>
+          <a
+            className="menu-popup-link"
+            role="menuitem"
+            href="https://github.com/lewisgormanneale/taiyaki"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+            <SquareArrowOutUpRight size={16} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="menu-popup-link"
+            role="menuitem"
+            href="https://lewisgormanneale.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Portfolio
+            <SquareArrowOutUpRight size={16} />
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }
