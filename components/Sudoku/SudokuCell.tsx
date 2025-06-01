@@ -46,19 +46,17 @@ function SudokuCell({
   );
 
   return (
-    <div className="">
-      <input
-        id={cellId}
-        type="text"
-        inputMode="numeric"
-        maxLength={1}
-        value={cell.value ?? ""}
-        onFocus={onFocus}
-        onChange={handleChange}
-        disabled={cell.locked}
-        className={cssClasses}
-      />
-    </div>
+    <input
+      id={cellId}
+      type="text"
+      inputMode="numeric"
+      maxLength={1}
+      value={cell.value ?? ""}
+      onFocus={onFocus}
+      onChange={handleChange}
+      disabled={cell.locked}
+      className={cssClasses}
+    />
   );
 }
 
