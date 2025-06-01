@@ -4,6 +4,7 @@ import { usePuzzleNavigation } from "../../hooks/usePuzzleNavigation";
 import SudokuGrid from "./SudokuGrid";
 import "./Sudoku.css";
 import SudokuInfo from "./SudokuInfo.tsx";
+import SudokuControls from "./SudokuControls.tsx";
 
 export default function Sudoku() {
   const {
@@ -56,6 +57,12 @@ export default function Sudoku() {
         focusedCell={focusedCell}
         setFocusedCell={setFocusedCell}
         handleChange={handleChange}
+      />
+      <SudokuControls
+        focusedCell={focusedCell}
+        setFocusedCell={setFocusedCell}
+        board={board}
+        setBoard={setBoard}
       />
       {isComplete && <div className="completion-message">Puzzle Complete</div>}
     </div>

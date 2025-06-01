@@ -1,5 +1,53 @@
-.controls {
+.sudoku-controls {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+
+    .number-buttons {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.25rem;
+        grid-auto-flow: dense;
+        font-size: 18px;
+
+        & button {
+
+            height: 40px;
+            width: 40px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 576px) {
+            grid-template-columns: repeat(3, 1fr);
+            .delete-button {
+                grid-column: 3 / 4; /* force to end of row on mobile devices */
+            }
+        }
+
+    }
+
+    .arrow-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+
+        .arrow-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.25rem;
+            justify-content: space-evenly;
+        }
+    }
+}
+
+.control-button {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 12px;
+    height: 40px;
+    width: 40px;
 }

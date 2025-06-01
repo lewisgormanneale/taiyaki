@@ -11,6 +11,9 @@ body {
     background: var(--color-background);
     color: var(--text-primary);
     font-family: system-ui, sans-serif;
+    transition: background-color 0.1s ease,
+    color 0.1s ease,
+    transform 0.1s ease;
 }
 
 button {
@@ -26,14 +29,22 @@ button {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    transition: background-color 0.2s ease,
-    color 0.2s ease,
+    transition: background-color 0.1s ease,
+    color 0.1s ease,
     transform 0.1s ease;
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
         background-color: var(--text-muted);
         color: var(--color-surface);
+    }
+
+    &.icon-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 8px;
     }
 
 }

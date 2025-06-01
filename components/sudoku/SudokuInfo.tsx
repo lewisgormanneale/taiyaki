@@ -1,11 +1,39 @@
 import SudokuTimer from "./SudokuTimer";
 import "./SudokuInfo.css";
+import { Flame, SkipForward } from "lucide-react";
+import type { Difficulty } from "../../types/sudoku.ts";
 
 type Props = {
-  difficulty: string;
+  difficulty: Difficulty;
   isTimerRunning: boolean;
   timerResetKey: number;
   onNewPuzzle: () => void;
+};
+
+const getFlameCount = (difficulty: Difficulty): number => {
+  switch (difficulty) {
+    case "Easy":
+      return 1;
+    case "Medium":
+      return 2;
+    case "Hard":
+      return 3;
+    default:
+      return 1;
+  }
+};
+
+const getFlameColor = (difficulty: Difficulty): string => {
+  switch (difficulty) {
+    case "Easy":
+      return "green";
+    case "Medium":
+      return "orange";
+    case "Hard":
+      return "red";
+    default:
+      return "gray";
+  }
 };
 
 export default function SudokuInfo({
@@ -14,16 +42,22 @@ export default function SudokuInfo({
   timerResetKey,
   onNewPuzzle,
 }: Props) {
+  const flameCount = getFlameCount(difficulty);
+  const flameColor = getFlameColor(difficulty);
   return (
     <div className="sudoku-info">
       <div className="difficulty-container">
-        <span className="difficulty">{difficulty}</span>
+        {[...Array(flameCount)].map((_, index) => (
+          <Flame key={index} size={20} color={flameColor} />
+        ))}
       </div>
       <div className="timer-container">
         <SudokuTimer isRunning={isTimerRunning} resetTrigger={timerResetKey} />
       </div>
       <div className="new-puzzle-container">
-        <button onClick={onNewPuzzle}>New Puzzle</button>
+        <button className="icon-button" onClick={onNewPuzzle}>
+          <SkipForward size={20} />
+        </button>
       </div>
     </div>
   );

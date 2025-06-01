@@ -9,7 +9,7 @@ import {
 export function usePuzzle() {
   const [board, setBoard] = useState<Cell[][]>([]);
   const [solution, setSolution] = useState<number[][]>([]);
-  const [difficulty, setDifficulty] = useState("");
+  const [difficulty, setDifficulty] = useState(null);
   const [isComplete, setIsComplete] = useState(false);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timerResetKey, setTimerResetKey] = useState(0);
@@ -17,7 +17,7 @@ export function usePuzzle() {
   const fetchPuzzle = async ({ signal }: { signal?: AbortSignal } = {}) => {
     setIsComplete(false);
     setBoard([]);
-    setDifficulty("");
+    setDifficulty(null);
     setIsTimerRunning(false);
     setTimerResetKey((prev) => prev + 1);
 
