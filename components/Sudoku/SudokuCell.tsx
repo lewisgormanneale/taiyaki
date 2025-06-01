@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo } from "react";
-import type { Cell } from "../../types/sudoku";
 import "./SudokuCell.css";
+import type { Cell } from "../../types/sudoku";
 
 type Props = {
   row: number;
@@ -45,17 +45,19 @@ function SudokuCell({
   );
 
   return (
-    <input
-      id={cellId}
-      type="text"
-      inputMode="numeric"
-      maxLength={1}
-      value={cell.value ?? ""}
-      onFocus={onFocus}
-      onChange={handleChange}
-      disabled={cell.locked}
-      className={cssClasses}
-    />
+    <div className="test">
+      <input
+        id={cellId}
+        type="text"
+        inputMode="numeric"
+        maxLength={1}
+        value={cell.value ?? ""}
+        onFocus={onFocus}
+        onChange={handleChange}
+        disabled={cell.locked}
+        className={cssClasses}
+      />
+    </div>
   );
 }
 
