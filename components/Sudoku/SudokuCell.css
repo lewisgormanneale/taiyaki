@@ -1,3 +1,7 @@
+.cell-container {
+    background-color: white;
+}
+
 .sudoku-cell {
     width: 40px;
     height: 40px;

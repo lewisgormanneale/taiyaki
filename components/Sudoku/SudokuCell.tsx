@@ -1,4 +1,5 @@
-import { memo } from "react";
+import * as React from "react";
+import { memo, useCallback, useMemo } from "react";
 import type { Cell } from "../../types/sudoku";
 import "./SudokuCell.css";
 
@@ -25,35 +26,53 @@ function SudokuCell({
   onFocus,
   onChange,
 }: Props) {
-  const cssClasses = [
-    "sudoku-cell",
-    cell.locked && "locked",
-    focused && "highlight-focus",
-    inRow && "highlight-row",
-    inCol && "highlight-col",
-    inBox && "highlight-box",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const cssClasses = useMemo(() => {
+    const classes = ["sudoku-cell"];
+    if (cell.locked) classes.push("locked");
+    if (focused) classes.push("highlight-focus");
+    if (inRow) classes.push("highlight-row");
+    if (inCol) classes.push("highlight-col");
+    if (inBox) classes.push("highlight-box");
+    return classes.join(" ");
+  }, [cell.locked, focused, inRow, inCol, inBox]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
+  const cellId = useMemo(() => `r${row + 1}c${col + 1}`, [row, col]);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+    },
+    [onChange],
+  );
 
   return (
-    <input
-      id={`r${row + 1}c${col + 1}`}
-      type="text"
-      inputMode="numeric"
-      maxLength={1}
-      value={cell.value ?? ""}
-      onFocus={onFocus}
-      onChange={handleChange}
-      disabled={cell.locked}
-      className={cssClasses}
-      aria-label={`Row ${row + 1}, Column ${col + 1}`}
-    />
+    <div className="">
+      <input
+        id={cellId}
+        type="text"
+        inputMode="numeric"
+        maxLength={1}
+        value={cell.value ?? ""}
+        onFocus={onFocus}
+        onChange={handleChange}
+        disabled={cell.locked}
+        className={cssClasses}
+      />
+    </div>
   );
 }
 
-export default memo(SudokuCell);
+const areEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.row === nextProps.row &&
+    prevProps.col === nextProps.col &&
+    prevProps.cell.value === nextProps.cell.value &&
+    prevProps.cell.locked === nextProps.cell.locked &&
+    prevProps.focused === nextProps.focused &&
+    prevProps.inRow === nextProps.inRow &&
+    prevProps.inCol === nextProps.inCol &&
+    prevProps.inBox === nextProps.inBox
+  );
+};
+
+export default memo(SudokuCell, areEqual);
