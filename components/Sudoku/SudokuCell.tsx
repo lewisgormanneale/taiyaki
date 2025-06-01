@@ -1,3 +1,4 @@
+import { memo, useCallback, useMemo } from "react";
 import type { Cell } from "../../types/sudoku";
 import "./SudokuCell.css";
 
@@ -13,7 +14,7 @@ type Props = {
   onChange: (val: string) => void;
 };
 
-export default function SudokuCell({
+function SudokuCell({
   row,
   col,
   cell,
@@ -24,17 +25,51 @@ export default function SudokuCell({
   onFocus,
   onChange,
 }: Props) {
+  const cssClasses = useMemo(() => {
+    const classes = ["sudoku-cell"];
+    if (cell.locked) classes.push("locked");
+    if (focused) classes.push("highlight-focus");
+    if (inRow) classes.push("highlight-row");
+    if (inCol) classes.push("highlight-col");
+    if (inBox) classes.push("highlight-box");
+    return classes.join(" ");
+  }, [cell.locked, focused, inRow, inCol, inBox]);
+
+  const cellId = useMemo(() => `r${row + 1}c${col + 1}`, [row, col]);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+    },
+    [onChange],
+  );
+
   return (
     <input
-      id={`r${row + 1}c${col + 1}`}
+      id={cellId}
       type="text"
       inputMode="numeric"
       maxLength={1}
       value={cell.value ?? ""}
       onFocus={onFocus}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={handleChange}
       disabled={cell.locked}
-      className={`sudoku-cell ${cell.locked ? "locked" : ""} ${focused ? "highlight-focus" : ""} ${inRow ? "highlight-row" : ""} ${inCol ? "highlight-col" : ""} ${inBox ? "highlight-box" : ""}`}
+      className={cssClasses}
     />
   );
 }
+
+const areEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.row === nextProps.row &&
+    prevProps.col === nextProps.col &&
+    prevProps.cell.value === nextProps.cell.value &&
+    prevProps.cell.locked === nextProps.cell.locked &&
+    prevProps.focused === nextProps.focused &&
+    prevProps.inRow === nextProps.inRow &&
+    prevProps.inCol === nextProps.inCol &&
+    prevProps.inBox === nextProps.inBox
+  );
+};
+
+export default memo(SudokuCell, areEqual);
