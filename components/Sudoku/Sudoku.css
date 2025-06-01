@@ -7,10 +7,10 @@
     background-color: var(--color-surface);
     font-family: Arial, sans-serif;
     border-radius: var(--border-radius);
-    width: 420px;
+    width: 400px;
 
     @media (max-width: 576px) {
-        width: 300px;
+        width: 315px;
     }
 
     .completion-message {
@@ -27,7 +27,7 @@
     align-items: center;
     gap: 16px;
     padding: 60px 20px;
-    min-height: 200px;
+    min-height: 420px;
     justify-content: center;
 
     .spinner {
