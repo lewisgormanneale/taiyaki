@@ -25,16 +25,12 @@ function SudokuCell({
   onFocus,
   onChange,
 }: Props) {
-  const cssClasses = [
-    "sudoku-cell",
-    cell.locked && "locked",
-    focused && "highlight-focus",
-    inRow && "highlight-row",
-    inCol && "highlight-col",
-    inBox && "highlight-box",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  let cssClasses = "sudoku-cell";
+  if (cell.locked) cssClasses += " locked";
+  if (focused) cssClasses += " highlight-focus";
+  if (inRow) cssClasses += " highlight-row";
+  if (inCol) cssClasses += " highlight-col";
+  if (inBox) cssClasses += " highlight-box";
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +72,6 @@ const areEqual = (prevProps: Props, nextProps: Props) => {
     prevProps.inRow === nextProps.inRow &&
     prevProps.inCol === nextProps.inCol &&
     prevProps.inBox === nextProps.inBox
-    // Note: We don't compare onFocus/onChange functions as they should be memoized at parent level
   );
 };
 
