@@ -1,7 +1,4 @@
-export type Cell = {
-  value: number | null;
-  locked: boolean;
-};
+import type { Cell, Difficulty } from "../types/sudoku.ts";
 
 export function formatBoard(grid: number[][]): Cell[][] {
   return grid.map((row) =>
@@ -32,3 +29,15 @@ export function validateBoard(board: Cell[][], solution: number[][]): boolean {
   }
   return true;
 }
+
+export const getDifficultyConfig = (difficulty: Difficulty) => {
+  const configs = {
+    Easy: { flameCount: 1, flameColor: "green" },
+    Medium: { flameCount: 2, flameColor: "orange" },
+    Hard: { flameCount: 3, flameColor: "red" },
+  } as const;
+  if (difficulty && difficulty in configs) {
+    return configs[difficulty];
+  }
+  return { flameCount: 0, flameColor: "gray" };
+};

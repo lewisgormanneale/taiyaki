@@ -1,8 +1,8 @@
 import * as React from "react";
 import { memo, useCallback } from "react";
-import { type Cell } from "../../utils/sudoku-utils";
 import "./SudokuControls.css";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import type { Cell } from "../../types/sudoku.ts";
 
 type Props = {
   focusedCell: { row: number; col: number } | null;

@@ -1,6 +1,8 @@
 import "./SudokuInfo.css";
 import { Flame, SkipForward } from "lucide-react";
 import type { Difficulty } from "../../types/sudoku.ts";
+import { getDifficultyConfig } from "../../utils/sudoku-utils.ts";
+import { formatTime } from "../../utils/utils.ts";
 
 interface Props {
   difficulty: Difficulty;
@@ -8,46 +10,12 @@ interface Props {
   elapsedTime: number;
 }
 
-const getFlameCount = (difficulty: Difficulty): number => {
-  switch (difficulty) {
-    case "Easy":
-      return 1;
-    case "Medium":
-      return 2;
-    case "Hard":
-      return 3;
-    default:
-      return 0;
-  }
-};
-
-const getFlameColor = (difficulty: Difficulty): string => {
-  switch (difficulty) {
-    case "Easy":
-      return "green";
-    case "Medium":
-      return "orange";
-    case "Hard":
-      return "red";
-    default:
-      return "gray";
-  }
-};
-
 export default function SudokuInfo({
   difficulty,
   onNewPuzzle,
   elapsedTime,
 }: Props) {
-  const flameCount = getFlameCount(difficulty);
-  const flameColor = getFlameColor(difficulty);
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const secs = (seconds % 60).toString().padStart(2, "0");
-    return `${mins}:${secs}`;
-  };
+  const { flameCount, flameColor } = getDifficultyConfig(difficulty);
   return (
     <div className="sudoku-info">
       <div className="difficulty-container">

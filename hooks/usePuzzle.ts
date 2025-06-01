@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  type Cell,
-  formatBoard,
-  lockBoard,
-  validateBoard,
-} from "../utils/sudoku-utils";
+import { formatBoard, lockBoard, validateBoard } from "../utils/sudoku-utils";
+import type { Cell } from "../types/sudoku.ts";
 
 export function usePuzzle() {
   const [board, setBoard] = useState<Cell[][]>([]);

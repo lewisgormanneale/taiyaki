@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function useTimer() {
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const start = () => setIsRunning(true);
   const stop = () => setIsRunning(false);
