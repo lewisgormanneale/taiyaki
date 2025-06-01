@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import type { Cell } from "../../types/sudoku";
 import "./SudokuCell.css";
 
@@ -36,24 +36,48 @@ function SudokuCell({
     .filter(Boolean)
     .join(" ");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+    },
+    [onChange],
+  );
+
+  const handleFocus = useCallback(() => {
+    onFocus();
+  }, [onFocus]);
 
   return (
     <input
-      id={`r${row + 1}c${col + 1}`}
       type="text"
       inputMode="numeric"
+      pattern="[1-9]"
       maxLength={1}
-      value={cell.value ?? ""}
-      onFocus={onFocus}
-      onChange={handleChange}
-      disabled={cell.locked}
+      value={cell.value || ""}
       className={cssClasses}
-      aria-label={`Row ${row + 1}, Column ${col + 1}`}
+      readOnly={cell.locked}
+      onFocus={handleFocus}
+      onChange={handleChange}
+      data-row={row}
+      data-col={col}
+      aria-label={`Cell ${row + 1}, ${col + 1}`}
     />
   );
 }
 
-export default memo(SudokuCell);
+// Custom comparison function for memo
+const areEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.row === nextProps.row &&
+    prevProps.col === nextProps.col &&
+    prevProps.cell.value === nextProps.cell.value &&
+    prevProps.cell.locked === nextProps.cell.locked &&
+    prevProps.focused === nextProps.focused &&
+    prevProps.inRow === nextProps.inRow &&
+    prevProps.inCol === nextProps.inCol &&
+    prevProps.inBox === nextProps.inBox
+    // Note: We don't compare onFocus/onChange functions as they should be memoized at parent level
+  );
+};
+
+export default memo(SudokuCell, areEqual);
