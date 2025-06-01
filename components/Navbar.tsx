@@ -8,12 +8,12 @@ function Navbar() {
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
-  
+
   return (
     <nav className="navbar">
       <div className="menu-container">
         <button className="icon-button" onClick={toggleMenu}>
-          <Menu size={16} />
+          <Menu size={20} />
         </button>
       </div>
       <div className="title-container">

@@ -56,7 +56,7 @@ export default function SudokuInfo({
       </div>
       <div className="new-puzzle-container">
         <button className="icon-button" onClick={onNewPuzzle}>
-          <SkipForward size={16} />
+          <SkipForward size={20} />
         </button>
       </div>
     </div>

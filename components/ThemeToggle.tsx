@@ -17,7 +17,7 @@ function ThemeToggle() {
 
   return (
     <button className="icon-button" onClick={toggleTheme}>
-      {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+      {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
     </button>
   );
 }

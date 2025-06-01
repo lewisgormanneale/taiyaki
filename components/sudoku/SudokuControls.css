@@ -9,6 +9,14 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 0.25rem;
         grid-auto-flow: dense;
+        font-size: 18px;
+
+        & button {
+
+            height: 40px;
+            width: 40px;
+            font-size: 18px;
+        }
 
         @media (max-width: 576px) {
             grid-template-columns: repeat(3, 1fr);
@@ -33,4 +41,13 @@
             justify-content: space-evenly;
         }
     }
+}
+
+.control-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    height: 40px;
+    width: 40px;
 }
