@@ -27,7 +27,7 @@ export default function SudokuInfo({
     debounceRef.current = setTimeout(() => {
       onNewPuzzle();
       debounceRef.current = null;
-    }, 500); // 500ms debounce
+    }, 500);
   };
 
   return (

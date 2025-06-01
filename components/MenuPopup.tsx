@@ -45,6 +45,18 @@ export default function MenuPopup({ isOpen, onClose, anchorRef }: Props) {
           <a
             className="menu-popup-link"
             role="menuitem"
+            href="https://griddle.lewisgormanneale.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Play Griddle
+            <SquareArrowOutUpRight size={16} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="menu-popup-link"
+            role="menuitem"
             href="https://github.com/lewisgormanneale/taiyaki"
             target="_blank"
             rel="noopener noreferrer"
