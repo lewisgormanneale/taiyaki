@@ -25,13 +25,6 @@ function SudokuCell({
   onFocus,
   onChange,
 }: Props) {
-  let cssClasses = "sudoku-cell";
-  if (cell.locked) cssClasses += " locked";
-  if (focused) cssClasses += " highlight-focus";
-  if (inRow) cssClasses += " highlight-row";
-  if (inCol) cssClasses += " highlight-col";
-  if (inBox) cssClasses += " highlight-box";
-
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.value);
@@ -50,7 +43,7 @@ function SudokuCell({
       pattern="[1-9]"
       maxLength={1}
       value={cell.value || ""}
-      className={"sudoku-cell" + cssClasses}
+      className={`sudoku-cell ${cell.locked ? "locked" : ""} ${focused ? "highlight-focus" : ""} ${inRow ? "highlight-row" : ""} ${inCol ? "highlight-col" : ""} ${inBox ? "highlight-box" : ""}`}
       readOnly={cell.locked}
       onFocus={handleFocus}
       onChange={handleChange}
