@@ -4,6 +4,9 @@
     align-items: center;
 
     .difficulty-container {
+        display: flex;
+        justify-content: start;
+        align-items: center;
         flex: 1;
 
         .difficulty {

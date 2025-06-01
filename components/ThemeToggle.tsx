@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(
@@ -15,8 +16,8 @@ function ThemeToggle() {
   };
 
   return (
-    <button onClick={toggleTheme}>
-      {theme === "light" ? "Dark" : "Light"} Mode
+    <button className="icon-button" onClick={toggleTheme}>
+      {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
     </button>
   );
 }
